@@ -23,6 +23,7 @@ class PlayerViewController: UIViewController {
     
     var artistLabel: UILabel!
     var titleLabel: UILabel!
+    var isFirstSong = true;
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -133,7 +134,10 @@ class PlayerViewController: UIViewController {
         let url = NSURL(string: "https://api.soundcloud.com/tracks/\(track.id)/stream?client_id=\(clientID)")!
         // FILL ME IN
         let song = AVPlayerItem(URL: url)
-        player.replaceCurrentItemWithPlayerItem(song)
+        if (isFirstSong) {
+            player.replaceCurrentItemWithPlayerItem(song)
+            isFirstSong = false;
+        }
         print(player.rate)
         if player?.rate == 0
         {
